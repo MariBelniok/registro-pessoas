@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Patterns, Masks } from '../shared/utils/Patterns';
+import { Patterns, Masks } from '../../shared/utils/Patterns';
 
 @Component({
   selector: 'app-form',
@@ -23,6 +23,11 @@ export class FormComponent implements OnInit {
 
   onAddPerson(){
 
+  }
+
+  onCleanUp(){
+    this.form.get('name').reset();
+    this.form.get('phone').reset();
   }
 
 }

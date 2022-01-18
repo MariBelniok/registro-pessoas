@@ -1,0 +1,24 @@
+<form [formGroup]="form" autocomplete="off" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-form-field fxFlex="50">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" aria-label="Nome"/>
+        <mat-error *ngIf="form.get('name').errors">
+            {{ form.get('name').errors | humanizeFormMessages : 'Nome' }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="50">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone" aria-label="Telefone" [textMask]="{mask: phoneMask}" />
+        <mat-error *ngIf="form.get('phone').errors">
+            {{ form.get('phone').errors | humanizeFormMessages : 'Telefone' }}
+        </mat-error>
+    </mat-form-field>
+    <button mat-button (click)="onAddPerson()" matTooltip="Adicionar pessoa a lista"
+        [disabled]="!form.get('name')?.value || !form.get('phone')?.value">
+        Salvar
+    </button>
+    <button mat-button (click)="onCleanUp()" matTooltip="Adicionar pessoa a lista"
+        [disabled]="!form.get('name')?.value || !form.get('phone')?.value">
+        Limpar
+    </button>
+</form>
