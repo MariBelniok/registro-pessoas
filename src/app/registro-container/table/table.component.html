@@ -1,36 +1,47 @@
-<mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
-
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table">
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            nome
-        </th>
-        <td mat-cell *matCellDef="let registro"> {{registro.nome}} </td>
-    </ng-container>
-
-    <!-- Phone Column -->
-    <ng-container matColumnDef="telefone">
-        <th mat-header-cell *matHeaderCellDef>
-            telefone
-        </th>
-        <td mat-cell *matCellDef="let registro"> {{registro.telefone}} </td>
-    </ng-container>
-
-    <!-- Action Column -->
-    <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let registro">
-            <button mat-icon-button color="warn" aria-label="Excluir" (click)="onDelete(registro.phone)">
-                <mat-icon>delete</mat-icon>
+<div class="table-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap.xs="10px">
+        <mat-form-field appearance="standard" >
+            <mat-label>Filtrar por nome</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Maria" #input>
+        </mat-form-field>
+        <div >
+            <button mat-raised-button color="warn" (click)="onCleanForm()">
+                Limpar Tabela
             </button>
-        </td>
-    </ng-container>
+        </div>
+    </div>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <mat-divider></mat-divider>
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                nome
+            </th>
+            <td mat-cell *matCellDef="let registro"> {{registro.nome}} </td>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef>
+                telefone
+            </th>
+            <td mat-cell *matCellDef="let registro"> {{registro.telefone}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let registro">
+                <button mat-icon-button color="warn" aria-label="Excluir" (click)="onDelete(registro.phone)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
     imports: [
         MatToolbarModule,
@@ -15,7 +15,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatIconModule,
         MatButtonModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatDividerModule
     ],
     exports: [
         MatToolbarModule,
@@ -24,7 +25,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatIconModule,
         MatButtonModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatDividerModule
     ]
   })
   export class AngularMaterialModule { }

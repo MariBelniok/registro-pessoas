@@ -35,13 +35,13 @@ export class TableComponent implements OnInit {
     this.service.deletePerson(phone.replace('/\D/g', ''));
   }
 
+  onCleanForm(){
+    this.service.cleanForm();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    console.log(this.dataSource.filter)
-    console.log(filterValue)
   }
-
 }

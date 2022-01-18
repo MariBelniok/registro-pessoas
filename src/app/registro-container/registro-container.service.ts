@@ -29,4 +29,10 @@ export class RegistroContainerService {
     this._registros.next([...registros]);
   }
 
+  public cleanForm(){
+    const registros = [];
+
+    this._registros.next([...registros]);
+  }
+
 }

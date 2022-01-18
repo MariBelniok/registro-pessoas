@@ -1,24 +1,35 @@
-<form [formGroup]="form" autocomplete="off" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <mat-form-field fxFlex="50">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome" aria-label="Nome"/>
-        <mat-error *ngIf="form.get('nome').errors">
-            {{ form.get('nome').errors | humanizeFormMessages : 'Nome' }}
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field fxFlex="50">
-        <mat-label>Telefone</mat-label>
-        <input matInput formControlName="telefone" aria-label="Telefone" [textMask]="{mask: phoneMask}" />
-        <mat-error *ngIf="form.get('telefone').errors">
-            {{ form.get('telefone').errors | humanizeFormMessages : 'Telefone' }}
-        </mat-error>
-    </mat-form-field>
-    <button mat-button (click)="onAddPerson()" matTooltip="Adicionar pessoa a lista"
-        [disabled]="!form.get('nome')?.value || !form.get('telefone')?.value">
-        Salvar
-    </button>
-    <button mat-button (click)="onCleanUp()" matTooltip="Adicionar pessoa a lista"
-        [disabled]="!form.get('nome')?.value || !form.get('telefone')?.value">
-        Limpar
-    </button>
-</form>
+<div class="form-container">
+    <header>
+        <h3>
+            Olá! Bem vindo ao registro de usuários.
+        </h3>
+        <span class="info">Favor, preencha os campos abaixo e adicione na listagem!</span>
+    </header>
+    <form [formGroup]="form" autocomplete="off" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
+        fxLayout.xs="column" fxLayoutGap.xs="0">
+        <mat-form-field fxFlex="40" fxFlex.xs="0" hideRequiredMarker>
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" aria-label="Nome"/>
+            <mat-error *ngIf="form.get('nome').errors">
+                {{ form.get('nome').errors | humanizeFormMessages : 'Nome' }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="40" fxFlex.xs="0" hideRequiredMarker>
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone" aria-label="Telefone" [textMask]="{mask: phoneMask}" />
+            <mat-error *ngIf="form.get('telefone').errors">
+                {{ form.get('telefone').errors | humanizeFormMessages : 'Telefone' }}
+            </mat-error>
+        </mat-form-field>
+        <div fxFlex="20" fxFlex.xs="0"  fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="onAddPerson()" matTooltip="Adicionar pessoa a lista"
+                [disabled]="!form.valid">
+                Salvar
+            </button>
+            <button mat-raised-button (click)="onCleanUp()" matTooltip="Adicionar pessoa a lista"
+                [disabled]="!form.valid">
+                Limpar
+            </button>
+        </div>
+    </form>
+</div>
