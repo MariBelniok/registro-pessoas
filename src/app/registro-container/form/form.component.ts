@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegistroModel } from 'src/app/models/registro.model';
 import { Patterns, Masks } from '../../shared/utils/Patterns';
+import { RegistroContainerService } from '../registro-container.service';
 
 @Component({
   selector: 'app-form',
@@ -11,7 +13,10 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   phoneMask = Masks.masksTelefone;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private service: RegistroContainerService
+  ) {
     this.form = this.fb.group({
       name: [null, [Validators.required, Validators.pattern(Patterns.nomeCompleto)]],
       phone: [null, [Validators.required, Validators.pattern(Patterns.telefone)]]
@@ -22,7 +27,14 @@ export class FormComponent implements OnInit {
   }
 
   onAddPerson(){
+    const model: RegistroModel = {
+      name: this.form.value.name,
+      phone: this.form.value.phone
+    };
 
+    this.service.addPerson(model);
+
+    this.onCleanUp();
   }
 
   onCleanUp(){

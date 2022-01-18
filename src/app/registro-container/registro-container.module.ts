@@ -9,13 +9,15 @@ import { HumanizeFormMessagesPipe } from '../shared/pipes/humanize-error.pipe';
 import { FormComponent } from './form/form.component';
 import { RegistroContainerComponent } from './registro-container.component';
 import { RegistroContainerService } from './registro-container.service';
+import { TableComponent } from './table/table.component';
 
 
 @NgModule({
   declarations: [
     RegistroContainerComponent,
     FormComponent,
-    HumanizeFormMessagesPipe
+    HumanizeFormMessagesPipe,
+    TableComponent
   ],
   imports: [
     CommonModule,

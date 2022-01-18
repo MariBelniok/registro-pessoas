@@ -4,9 +4,29 @@ import { RegistroModel } from '../models/registro.model';
 
 @Injectable()
 export class RegistroContainerService {
-  private _registro = new BehaviorSubject<RegistroModel[]>(null);
-  public readonly registro$: Observable<RegistroModel[]> = this._registro.asObservable();
+  private _registros = new BehaviorSubject<RegistroModel[]>([]);
+  public readonly registros$: Observable<RegistroModel[]> = this._registros.asObservable();
 
   constructor() { }
+
+  public addPerson(registro: RegistroModel){
+    let registros = this._registros.getValue();
+
+    if (registros.find(r => r === registro )) {
+      throw new Error;
+    }
+
+    registros.push(registro);
+
+    this._registros.next([...registros]);
+  }
+
+  public deletePerson(phone: string){
+    let registros = this._registros.getValue();
+
+    registros = registros.filter(r => r.phone.replace('/\D/g', '') !== phone);
+
+    this._registros.next([...registros]);
+  }
 
 }
