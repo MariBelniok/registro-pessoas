@@ -12,7 +12,7 @@ export class RegistroContainerService {
   public addPerson(registro: RegistroModel){
     let registros = this._registros.getValue();
 
-    if (registros.find(r => r === registro )) {
+    if (registros.find(r => r.nome === registro.nome || r.telefone === registro.telefone )) {
       throw new Error;
     }
 
@@ -34,5 +34,4 @@ export class RegistroContainerService {
 
     this._registros.next([...registros]);
   }
-
 }
