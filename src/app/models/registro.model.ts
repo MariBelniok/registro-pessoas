@@ -1,4 +1,4 @@
 export interface RegistroModel {
-    name: string;
-    phone: string;
+    nome: string;
+    telefone: string;
 }

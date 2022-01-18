@@ -21,10 +21,10 @@ export class RegistroContainerService {
     this._registros.next([...registros]);
   }
 
-  public deletePerson(phone: string){
+  public deletePerson(telefone: string){
     let registros = this._registros.getValue();
 
-    registros = registros.filter(r => r.phone.replace('/\D/g', '') !== phone);
+    registros = registros.filter(r => r.telefone.replace('/\D/g', '') !== telefone);
 
     this._registros.next([...registros]);
   }

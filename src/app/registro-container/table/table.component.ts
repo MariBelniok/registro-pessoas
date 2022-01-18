@@ -1,6 +1,5 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegistroModel } from 'src/app/models/registro.model';
 
@@ -11,33 +10,38 @@ import { RegistroContainerService } from '../registro-container.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent {
-  @ViewChild(MatSort) sort: MatSort;
-  
-  registros: RegistroModel[];
+export class TableComponent implements OnInit {
   dataSource: MatTableDataSource<RegistroModel>;
 
-  displayedColumns: string[] = [ 'nome', 'telefone', 'acoes' ];
+  displayedColumns: string[] = ['nome', 'telefone', 'acoes'];
+  
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-    private service: RegistroContainerService, 
-    private _liveAnnouncer: LiveAnnouncer) 
-  { 
-    this.service.registros$.subscribe(r => this.registros = r);
-    this.dataSource = new MatTableDataSource(this.registros);
-    this.dataSource.sort = this.sort;
+    private service: RegistroContainerService
+  ) {
+
+  }
+  ngOnInit(): void {
+    this.service.registros$
+      .pipe()
+      .subscribe(r => {
+        this.dataSource = new MatTableDataSource(r);
+        this.dataSource.sort = this.sort;
+      });
   }
 
-  onDelete(phone: string){
+  onDelete(phone: string) {
     this.service.deletePerson(phone.replace('/\D/g', ''));
   }
 
-  announceSortChange(sortState) {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
 
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    console.log(this.dataSource.filter)
+    console.log(filterValue)
   }
+
 }

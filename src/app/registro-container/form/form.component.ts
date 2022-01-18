@@ -18,8 +18,8 @@ export class FormComponent implements OnInit {
     private service: RegistroContainerService
   ) {
     this.form = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern(Patterns.nomeCompleto)]],
-      phone: [null, [Validators.required, Validators.pattern(Patterns.telefone)]]
+      nome: [null, [Validators.required, Validators.pattern(Patterns.nomeCompleto)]],
+      telefone: [null, [Validators.required, Validators.pattern(Patterns.telefone)]]
     });
   }
 
@@ -28,8 +28,8 @@ export class FormComponent implements OnInit {
 
   onAddPerson(){
     const model: RegistroModel = {
-      name: this.form.value.name,
-      phone: this.form.value.phone
+      nome: this.form.value.nome,
+      telefone: this.form.value.telefone
     };
 
     this.service.addPerson(model);
@@ -38,8 +38,8 @@ export class FormComponent implements OnInit {
   }
 
   onCleanUp(){
-    this.form.get('name').reset();
-    this.form.get('phone').reset();
+    this.form.get('nome').reset();
+    this.form.get('telefone').reset();
   }
 
 }

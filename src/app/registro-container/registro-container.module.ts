@@ -24,7 +24,7 @@ import { TableComponent } from './table/table.component';
     AngularMaterialModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    TextMaskModule
+    TextMaskModule,
     ],
   exports: [
     RegistroContainerComponent,
