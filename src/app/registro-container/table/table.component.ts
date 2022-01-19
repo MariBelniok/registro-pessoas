@@ -2,10 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { RegistroModel } from 'src/app/models/registro.model';
 
 import { RegistroContainerService } from '../registro-container.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -26,7 +28,7 @@ export class TableComponent implements OnInit {
   }
   ngOnInit(): void {
     this.service.registros$
-      .pipe()
+      .pipe(untilDestroyed(this))
       .subscribe(r => {
         this.dataSource = new MatTableDataSource(r);
         this.dataSource.sort = this.sort;
